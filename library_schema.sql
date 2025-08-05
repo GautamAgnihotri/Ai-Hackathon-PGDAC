@@ -1,0 +1,56 @@
+-- Create the database
+CREATE DATABASE IF NOT EXISTS LibraryDB;
+USE LibraryDB;
+
+-- TABLE: MEMBERS
+CREATE TABLE MEMBERS (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    email VARCHAR(255),
+    phone VARCHAR(20),
+    passwd VARCHAR(255),
+    role VARCHAR(50)
+);
+
+-- TABLE: BOOKS
+CREATE TABLE BOOKS (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    author VARCHAR(255),
+    subject VARCHAR(255),
+    price DECIMAL(10, 2),
+    isbn VARCHAR(20)
+);
+
+-- TABLE: COPIES
+CREATE TABLE COPIES (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    bookid INT,
+    rack INT,
+    status VARCHAR(50),
+    FOREIGN KEY (bookid) REFERENCES BOOKS(id)
+);
+
+-- TABLE: ISSUERECORD
+CREATE TABLE ISSUERECORD (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    copyid INT,
+    memberid INT,
+    issued DATETIME,
+    returndue DATETIME,
+    returned DATETIME,
+    fine DECIMAL(10, 2),
+    FOREIGN KEY (copyid) REFERENCES COPIES(id),
+    FOREIGN KEY (memberid) REFERENCES MEMBERS(id)
+);
+
+-- TABLE: PAYMENTS
+CREATE TABLE PAYMENTS (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    memberid INT,
+    amount DECIMAL(10, 2),
+    type VARCHAR(50),
+    txtime DATETIME,
+    duedate DATETIME,
+    FOREIGN KEY (memberid) REFERENCES MEMBERS(id)
+);
