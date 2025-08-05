@@ -1,7 +1,7 @@
-const express = require("express");
-const cors = require("cors");
+const express = require('express');
+const cors= require("cors");
 const app = express();
-
+app.use(cors());
 app.use(express.json());
 app.use(cors());
 
@@ -14,12 +14,19 @@ const copyRoutes = require('./routes/copyRoutes');
 // const issueRoutes = require('./routes/issueRoutes');
 // const fineRoutes = require('./routes/fineRoutes');
 // const paymentRoutes = require('./routes/paymentRoutes');
+const memberRoutes = require('./routes/memberRoutes');
+const dashboardStats = require('./DashBoard_stats/dashboard_stats');
 
 // Use routers with API prefix
+
 app.use("/api/auth", authRoutes);
-// app.use('/api/users', userRoutes);
+
 app.use('/api/books', bookRoutes);
 app.use('/api/copies', copyRoutes);
+
+app.use( '/api/addMembers', memberRoutes);
+app.use('/dashboard/stats', dashboardStats);
+
 // app.use('/api/issues', issueRoutes);
 // app.use('/api/fines', fineRoutes);
 // app.use('/api/payments', paymentRoutes);

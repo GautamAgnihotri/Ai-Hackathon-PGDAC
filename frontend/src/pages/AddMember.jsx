@@ -31,13 +31,42 @@ const AddMember = () => {
     return true;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
-    console.log('Registration attempt:', formData);
-    alert(
-      'Registration functionality will be implemented with backend integration'
-    );
+
+    try {
+      const res = await fetch("http://localhost:3000/api/addMembers", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+        })
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        alert("✅ Member added successfully!");
+        console.log("Member added:", data);
+
+        // reset form
+        setFormData({
+          fullName: "",
+          email: "",
+          phone: "",
+        });
+      } else {
+        const err = await res.json();
+        alert("❌ " + (err.message || "Failed to add member"));
+      }
+    } catch (error) {
+      console.error("Error adding member:", error);
+      alert("❌ Server error. Please try again.");
+    }  
   };
 
   return (
