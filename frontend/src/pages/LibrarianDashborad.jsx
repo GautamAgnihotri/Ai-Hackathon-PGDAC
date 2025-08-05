@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../assets/styles/dashboard.css";
 import { toast } from "react-toastify";
+import { getDashboardStats } from "../services/dashboardService.js";
 
 export default function LibrarianDashboard() {
   const navigate = useNavigate();
@@ -10,6 +11,8 @@ export default function LibrarianDashboard() {
     { type: "danger", icon: "🚨", title: "Urgent", message: "3 books are overdue and need immediate attention for fine collection." },
     { type: "warning", icon: "⚠️", title: "Notice", message: "5 members have unpaid monthly fees due today." }
   ]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [stats] = useState([
     { value: 247, label: "Total Books in Library", trend: "+12 added this month" },
     { value: 89, label: "Currently Issued", trend: "15 due this week" },
@@ -53,6 +56,32 @@ export default function LibrarianDashboard() {
     toast.info("Logged out");
     navigate("/login");
   }
+//     // Add useEffect to fetch data when component mounts
+//   useEffect(() => {
+//     const fetchDashboardData = async () => {
+//       try {
+//         const data = await getDashboardStats();
+//         setStats([
+//           { value: data.totalBooks, label: "Total Books in Library", trend: `+${data.monthlyAdditions} added this month` },
+//           { value: data.issuedBooks, label: "Currently Issued", trend: `${data.dueThisWeek} due this week` },
+//           { value: data.availableCopies, label: "Available Copies", trend: "Ready for issue" },
+//           { value: data.overdueBooks, label: "Overdue Books", trend: "Need immediate action", urgent: true },
+//           { value: data.activeMembers, label: "Active Members", trend: `${data.newMembersThisWeek} new this week` },
+//           { value: `₹${data.todaysCollections}`, label: "Today's Collections", trend: "Fees + Fines" }
+//         ]);
+//       } catch (err) {
+//         setError(err.message);
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+
+//     fetchDashboardData();
+//   }, []);
+
+//   if (loading) return <div className="loading">Loading dashboard...</div>;
+//   if (error) return <div className="error">Error loading dashboard: {error}</div>;
+//   if (!stats) return <div className="error">No data available</div>;
 
   return (
     <>
