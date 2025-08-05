@@ -1,0 +1,202 @@
+/* PaymentReports.css */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.back-link {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.page-header {
+  margin-bottom: 1.5rem;
+}
+
+.revenue-overview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.revenue-card {
+  background: #fff;
+  padding: 1rem;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.revenue-amount {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.revenue-change.positive {
+  color: #28a745;
+}
+
+.revenue-change.negative {
+  color: #dc3545;
+}
+
+.filters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.filter-group label {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.filter-group input,
+.filter-group select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.btn {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  background: #6c757d;
+}
+
+.btn-small {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.85rem;
+}
+
+.reports-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.collections-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.collections-table th,
+.collections-table td {
+  border: 1px solid #dee2e6;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.amount-cell.fee-amount {
+  color: #007bff;
+}
+
+.amount-cell.fine-amount {
+  color: #dc3545;
+}
+
+.amount-cell.total-amount {
+  font-weight: bold;
+}
+
+.quick-stats .stat-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.payment-breakdown .breakdown-bar {
+  background: #e9ecef;
+  height: 24px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.breakdown-fill.fee-fill {
+  background: #007bff;
+  height: 100%;
+  color: white;
+  padding-left: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.breakdown-fill.fine-fill {
+  background: #dc3545;
+  height: 100%;
+  color: white;
+  padding-left: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.breakdown-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+
+.transaction-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.transaction-member {
+  font-weight: bold;
+}
+
+.amount-value.total-amount {
+  color: #28a745;
+}
+
+.amount-value.fee-amount {
+  color: #007bff;
+}
+
+.amount-value.fine-amount {
+  color: #dc3545;
+}
+
+@media (max-width: 768px) {
+  .reports-grid {
+    grid-template-columns: 1fr;
+  }
+}
