@@ -4,7 +4,7 @@ const app = express();
 app.use(express.json());
 
 // Import routers
-// const authRoutes = require('./routes/authRoutes');
+const authRoutes = require('./routes/authRoutes');
 // const userRoutes = require('./routes/userRoutes');
 const bookRoutes = require('./routes/bookRoutes');
 // const copyRoutes = require('./routes/copyRoutes');
@@ -13,7 +13,7 @@ const bookRoutes = require('./routes/bookRoutes');
 // const paymentRoutes = require('./routes/paymentRoutes');
 
 // Use routers with API prefix
-// app.use('/api/auth', authRoutes);
+app.use('/api/auth', authRoutes);
 // app.use('/api/users', userRoutes);
 app.use('/api/books', bookRoutes);
 // app.use('/api/copies', copyRoutes);
