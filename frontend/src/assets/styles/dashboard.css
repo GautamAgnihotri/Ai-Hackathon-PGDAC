@@ -68,6 +68,10 @@ header {
   display: inline-block;
 }
 
+button{
+  height: 50px;
+}
+
 .btn:hover {
   background: #333;
   color: #fff;
