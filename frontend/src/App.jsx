@@ -14,6 +14,8 @@ import LibrarianDashboard from './pages/LibrarianDashborad';
 import IssueBook from './pages/Books/Issue_Books';
 import AddMember from './pages/AddMember';
 import UserManagement from './pages/UserManagement';
+import IssueHistory from './pages/IssueHistory';
+import OverdueBooks from './pages/OverdueBooks';
 import ReturnBook from './pages/ReturnBook';
 
 function App() {
@@ -32,6 +34,8 @@ function App() {
           <Route path='books-copies-management' element={<BookCopiesManagement />} />
           <Route path='collect-payment' element={<CollectPayment />} />
           <Route path='edit-book' element={<EditBook />} />
+          <Route path='issue-history' element={<IssueHistory />} />
+          <Route path='overdue-books' element={<OverdueBooks />} />
           <Route path='dashboard' element={<LibrarianDashboard />}/>
           <Route path='issueBooks' element={<IssueBook/>}/>
           <Route path='addMember' element={<AddMember />} />
