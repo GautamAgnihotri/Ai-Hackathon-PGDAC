@@ -10,6 +10,10 @@ import BooksCatalog from './pages/BooksCatalog';
 import BookCopiesManagement from './pages/BookCopiesManagement';
 import CollectPayment from './pages/CollectPayment';
 import EditBook from './pages/EditBook';
+import LibrarianDashboard from './pages/LibrarianDashborad';
+import IssueBook from './pages/Books/Issue_Books';
+import AddMember from './pages/AddMember';
+import UserManagement from './pages/UserManagement';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -27,6 +31,10 @@ function App() {
           <Route path='books-copies-management' element={<BookCopiesManagement />} />
           <Route path='collect-payment' element={<CollectPayment />} />
           <Route path='edit-book' element={<EditBook />} />
+          <Route path='dashboard' element={<LibrarianDashboard />}/>
+          <Route path='issue_books' element={<IssueBook/>}/>
+          <Route path='addMember' element={<AddMember />} />
+          <Route path='userManagement' element={<UserManagement />} />
         </Route>
       </Routes>
     </>
