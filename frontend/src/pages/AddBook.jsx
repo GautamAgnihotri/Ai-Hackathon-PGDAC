@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { createBook } from "../services/Books";
 
 export default function AddNewBook() {
   const [formData, setFormData] = useState({
@@ -42,13 +43,13 @@ export default function AddNewBook() {
     setFormData((prev) => ({ ...prev, copyOption: e.target.value }));
   }
 
-  function handleSubmit(e) {
+  async function handleAddBook(e) {
     e.preventDefault();
 
     setErrorMessage("");
     setSuccessMessage("");
 
-    // Basic validation
+    // Validation
     if (
       !formData.bookTitle.trim() ||
       !formData.author.trim() ||
@@ -60,54 +61,62 @@ export default function AddNewBook() {
       return;
     }
 
-    // ISBN validation (basic format check)
     const isbnPattern = /^978-\d{10}$/;
     if (!isbnPattern.test(formData.isbn)) {
       setErrorMessage("Please enter a valid ISBN in format: 978-XXXXXXXXX");
       return;
     }
 
-    // Price validation
     if (formData.price <= 0) {
       setErrorMessage("Price must be greater than 0.");
       return;
     }
 
-    // Copy validation if adding now
+    // Only handling "add copies later" for now
     if (formData.copyOption === "now") {
-      if (!formData.copyCount || !formData.defaultRack) {
-        setErrorMessage("Please specify copy count and rack location.");
-        return;
-      }
+      setErrorMessage("Adding copies immediately is not supported yet.");
+      return;
     }
 
-    console.log("Book data to be submitted:", formData);
-    setSuccessMessage(
-      `Book "${formData.bookTitle}" has been successfully added to the library!`
-    );
+    const bookData = {
+      name: formData.bookTitle,
+      author: formData.author,
+      subject: formData.subject,
+      isbn: formData.isbn,
+      price: Number(formData.price),
+    };
 
-    setTimeout(() => {
-      if (
-        window.confirm(
-          "Book added successfully! Would you like to add another book?"
-        )
-      ) {
-        setFormData({
-          bookTitle: "",
-          author: "",
-          subject: "",
-          isbn: "",
-          price: "",
-          description: "",
-          copyOption: "later",
-          copyCount: 1,
-          defaultRack: "",
-        });
-        setSuccessMessage("");
-      } else {
-        window.location.href = "books-catalog.html";
-      }
-    }, 1500);
+    try {
+      await createBook(bookData);
+      setSuccessMessage(
+        `Book "${formData.bookTitle}" has been successfully added to the library!`
+      );
+
+      setTimeout(() => {
+        if (
+          window.confirm(
+            "Book added successfully! Would you like to add another book?"
+          )
+        ) {
+          setFormData({
+            bookTitle: "",
+            author: "",
+            subject: "",
+            isbn: "",
+            price: "",
+            description: "",
+            copyOption: "later",
+            copyCount: 1,
+            defaultRack: "",
+          });
+          setSuccessMessage("");
+        } else {
+          window.location.href = "/books-catalog";
+        }
+      }, 1500);
+    } catch (error) {
+      setErrorMessage("Failed to add book. Please try again.");
+    }
   }
 
   return (
@@ -409,7 +418,7 @@ export default function AddNewBook() {
               </div>
             )}
 
-            <form id="addBookForm" onSubmit={handleSubmit}>
+            <form id="addBookForm" onSubmit={handleAddBook}>
               <div className="form-section">
                 <h2>Book Information</h2>
 
