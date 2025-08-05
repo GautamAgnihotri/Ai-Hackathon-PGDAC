@@ -85,11 +85,11 @@ export default function LibrarianDashboard() {
               <div className="panel">
                 <h2>Quick Actions</h2>
                 <div className="quick-actions">
-                  <Link to="/issue_books" className="action-card"><h3>Issue Book</h3><p>Issue book to member</p></Link>
-                  <Link to="/return-book" className="action-card"><h3>Return Book</h3><p>Process book return</p></Link>
+                  <Link to="/issueBooks" className="action-card"><h3>Issue Book</h3><p>Issue book to member</p></Link>
+                  <Link to="/returnBook" className="action-card"><h3>Return Book</h3><p>Process book return</p></Link>
                   <Link to="/collect-payment" className="action-card"><h3>Collect Payment</h3><p>Monthly fees & fines</p></Link>
                   <Link to="/add-book" className="action-card"><h3>Add New Book</h3><p>Register new title</p></Link>
-                  <Link to="/add-member" className="action-card"><h3>Add Member</h3><p>Register new user</p></Link>
+                  <Link to="/addMember" className="action-card"><h3>Add Member</h3><p>Register new user</p></Link>
                   <Link to="/overdue-books" className="action-card"><h3>Overdue Books</h3><p>View late returns</p></Link>
                 </div>
               </div>
