@@ -6,8 +6,8 @@ import Index from './pages/Index';
 import RegisterPage from './pages/Register';
 import LibrarianDashboard from './pages/LibrarianDashborad';
 import IssueBook from './pages/Books/Issue_Books';
-
 import AddMember from './pages/AddMember';
+import UserManagement from './pages/UserManagement';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -22,6 +22,7 @@ function App() {
           <Route path='dashboard' element={<LibrarianDashboard />}/>
           <Route path='issue_books' element={<IssueBook/>}/>
           <Route path='addMember' element={<AddMember />} />
+          <Route path='userManagement' element={<UserManagement />} />
         </Route>
       </Routes>
     </>
