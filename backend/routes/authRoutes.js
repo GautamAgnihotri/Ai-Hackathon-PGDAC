@@ -8,7 +8,7 @@ const result = require("../utils/result");
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
-  console.log({ email });
+  console.log({ email, password });
 
   const sql = `SELECT * FROM members WHERE email = ? AND passwd = ? AND role = ?`;
   pool.query(sql, [email, password, "librarian"], (error, data) => {

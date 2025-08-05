@@ -1,9 +1,11 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../assets/styles/dashboard.css";
+import { toast } from "react-toastify";
 
 export default function LibrarianDashboard() {
-  const [librarian] = useState({ name: "Sarah Johnson", role: "Librarian" });
+  const navigate = useNavigate();
+  const [librarian, setLibrarian] = useState({ name: "Sarah Johnson", role: "Librarian" });
   const [alerts] = useState([
     { type: "danger", icon: "🚨", title: "Urgent", message: "3 books are overdue and need immediate attention for fine collection." },
     { type: "warning", icon: "⚠️", title: "Notice", message: "5 members have unpaid monthly fees due today." }
@@ -36,6 +38,22 @@ export default function LibrarianDashboard() {
     "Available Books": 158
   });
 
+  useEffect(() => {
+    const newName = sessionStorage.getItem("name")
+    setLibrarian({
+      ...librarian,
+      name: newName
+    })
+  }, [])
+
+  const signoutHandler = () => {
+    sessionStorage.removeItem("name");
+    sessionStorage.removeItem("token");
+
+    toast.info("Logged out");
+    navigate("/login");
+  }
+
   return (
     <>
       <header>
@@ -46,7 +64,7 @@ export default function LibrarianDashboard() {
               <span className="user-role">{librarian.role}</span>
               <span>{librarian.name}</span>
               <Link to="/profile" className="btn">Profile</Link>
-              <Link to="/login" className="btn">Sign Out</Link>
+              <button onClick={signoutHandler} className="btn">Sign Out</button>
             </div>
           </div>
         </div>

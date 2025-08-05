@@ -1,15 +1,29 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { loginLibrarian } from "../services/authService";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (email && password) {
-      console.log("Login attempt:", { email, password });
-      alert("Login functionality will be implemented with backend integration");
+      const result = await loginLibrarian(email, password);
+
+      console.log(result);
+
+      if (result.status == "success") {
+        toast.success("Welcome!")
+        sessionStorage.setItem("token", result.data.token)
+        sessionStorage.setItem("name", result.data.name)
+        navigate("/dashboard")
+      }
+      else {
+        toast.error("Incorrect credentials!")
+      }
     }
   };
 
